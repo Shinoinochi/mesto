@@ -1,2 +1,32 @@
 @import url(/vendor/normalize.css);
 @import url(/vendor/fonts/inter.css);
+.background {
+    background-color: black;
+}
+.page {
+    max-width: 1280px;
+    margin: auto;
+    min-width: 320px;
+}
+.header {
+    width: 68.7%;
+    margin: auto;
+    margin-top: 45px;
+    border-bottom: 1px solid #545454;   
+}
+.header__logo {
+    width: 142px;
+    height: 33px;
+    margin-bottom: 36px;
+}
+@media screen and (max-width:425px) {
+    .header {
+        width: 100%;
+        margin-top: 24px;
+    }
+    .header__logo {
+        margin-left: 27px;
+        margin-bottom: 22px;
+        max-width: 103.7px;
+    }
+}
