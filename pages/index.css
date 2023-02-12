@@ -7,6 +7,7 @@
     max-width: 1280px;
     margin: auto;
     min-width: 320px;
+    width: 68.7%;
     color: #fff;
     font-family: 'Inter', 'Arial', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -17,7 +18,7 @@
     text-rendering: optimizeLegibility; 
 }
 .header {
-    width: 68.7%;
+
     margin: auto;
     margin-top: 45px;
     border-bottom: 1px solid #545454;   
@@ -43,7 +44,6 @@
 .profile {
     display: flex;
     margin: auto;
-    width: 68.7%;
     align-items: center;
 }
 .profile__info {
@@ -95,7 +95,21 @@
     padding: 0;
 }
 
-
+.footer__copyright {
+    color:#545454;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 60px;
+}
+@media screen and (max-width: 320px) {
+    .footer__copyright {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+    }
+    
+}
 @media screen and (max-width: 320px) {
     .profile {
         flex-direction: column;
