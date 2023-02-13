@@ -243,6 +243,7 @@
 }
 .popup__container {
     margin: auto;
+    position: relative;
     background-color: #fff;
     border-radius: 3%;
     /* display: none; */
@@ -261,16 +262,17 @@
 }
 .popup__username {
     border: none;
-    
     border-bottom: 2px solid #a8a8a8;
     margin-bottom: 30px;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    height: 30px;
 }
 .popup__username:focus {
+    border: 2px solid rgb(55, 154, 235);
+    border-radius: 5px;
     outline: none;
-
 }
 .popup__role {
     border: none;
@@ -279,17 +281,18 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-
+    height: 30px;
 }
 .popup__role:focus {
+    border: 2px solid rgb(55, 154, 235);
+    border-radius: 5px;
     outline: none;
-
 }
 
 .popup__button {
     background-color: #000;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 2px;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -297,6 +300,18 @@
     cursor: pointer;
     margin-bottom: 37px;
 }
+.popup__button:hover {
+    background-color: #313131;
+}
 .popup__close {
     display: block;
+}
+.popup__button_close {
+    background-image: url(/images/CloseIcon.png);
+    width: 32px;
+    height: 32px;
+    position: fixed;
+    right: 29%;
+    top: 30%;
+    cursor: pointer;
 }
