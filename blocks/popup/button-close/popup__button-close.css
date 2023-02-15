@@ -36,8 +36,6 @@
 }
 @media screen and (max-width: 320px) {
     .popup__button-close {
-
-
         right: 6%;
         top: 27%;
     }

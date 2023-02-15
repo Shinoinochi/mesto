@@ -2,7 +2,6 @@
     border: none;
     border-bottom: 1px solid #a8a8a8;
     margin: 0 34px 23px 36px;
-
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -17,9 +16,6 @@
 }
 @media screen and (max-width: 320px) {
     .popup__username {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
         margin: 0 22px 23px 22px;
     }
 }

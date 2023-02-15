@@ -12,7 +12,6 @@
 @media screen and (max-width: 845px) {
     .profile__role {
         margin: auto;
-        font-weight: 400;
         font-size: 14px;
         line-height: 17px;
         text-align: center;
