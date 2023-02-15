@@ -2,7 +2,7 @@
     align-self:flex-start;
     margin-top: 17px;
     margin-left: 17px;
-    cursor: pointer;   
+    cursor: pointer;
     flex-shrink: 0;
     transition: opacity 0.5s ease;
 }
