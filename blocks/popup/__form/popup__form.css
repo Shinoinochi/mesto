@@ -1,18 +1,13 @@
-.popup__container {
+.popup__form {
     margin: auto;
     background-color: #fff;
-    color: #000;
-    width: 430px;
-    height: 330px;
-    border-radius: 2.5%;
     display: flex;
     flex-direction: column;
+    border-radius: 2.5%;
 }
 
 @media screen and (max-width: 500px) {
-    .popup__container {
-        width: 282px;
-        height: 322px;
+    .popup__form {
         border-radius: 3.4%;
     }
 }

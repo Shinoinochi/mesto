@@ -1,4 +1,6 @@
 .popup__button-close {
+    background-color: transparent;
+    border: none;
     background-image: url(../../../images/CloseIcon.png);
     width: 32px;
     height: 32px;
@@ -38,5 +40,40 @@
     .popup__button-close {
         right: 6%;
         top: 27%;
+    }
+}
+@media screen and (max-height: 1200px) {
+    .popup__button-close {
+        top: 33%;
+    }
+}
+@media screen and (max-height: 1000px) {
+    .popup__button-close {
+        top: 29%;
+    }
+}
+@media screen and (max-height: 900px) {
+    .popup__button-close {
+        top: 26%;
+    }
+}
+@media screen and (max-height: 800px) {
+    .popup__button-close {
+        top: 20%;
+    }
+}
+@media screen and (max-height: 700px) {
+    .popup__button-close {
+        top: 17%;
+    }
+}
+@media screen and (max-height: 600px) {
+    .popup__button-close {
+        top: 14%;
+    }
+}
+@media screen and (max-height: 550px) {
+    .popup__button-close {
+        top: 8%;
     }
 }
