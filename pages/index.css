@@ -46,7 +46,12 @@
     cursor: pointer;
     border: none;
 }
-
+.popup__name {
+    margin-bottom: 22px;
+}
+.popup__url {
+    margin-bottom: 48px;
+}
 
 
 
