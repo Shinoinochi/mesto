@@ -9,7 +9,7 @@ let Username = container.querySelector('.profile__name');
 let Role = container.querySelector('.profile__role');
 let popupUsername = container.querySelector('.popup__username');
 let popupRole = container.querySelector('.popup__role');
-let popupForm = container.querySelector('.popup__form');
+let popupForm = container.querySelectorAll('.popup__form');
 const galleryContainer = container.querySelector('.gallery');
 let cardName = container.querySelectorAll('.gallery__title');
 let cardImage = container.querySelectorAll('.gallery__image');
@@ -18,6 +18,13 @@ let galleryItems = container.querySelectorAll('.gallery__item');
 let galleryDelete = container.querySelectorAll('.gallery__delete');
 const buttonCreate = container.querySelector('.popup__button-create');
 const buttonPopAdd = container.querySelector('.profile__add');
+const popupImageContainer = container.querySelector('.popup-image');
+const galleryImage = container.querySelectorAll('.gallery__image');
+const galleryTitle = container.querySelector('.gallery__title');
+const popupTitle = container.querySelector('.popup-image__title');
+const popupImageButton = container.querySelector('.popup__button-image');
+const template = document.querySelector('#gallery-template').content;
+let popupImage;
 const initialCards = [
     {
       name: 'Архыз',
@@ -44,12 +51,22 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
-function update() {
 
+function update() {
+  galleryItems = container.querySelectorAll('.gallery__item');
   likes = document.querySelectorAll('.gallery__like');
   galleryDelete = document.querySelectorAll('.gallery__delete');
-  console.log(likes, galleryDelete);
+  updateImages();
 }
+for (let j = 0; j < initialCards.length; j++) {
+  let baseGallery = template.querySelector('.gallery__item').cloneNode(true);
+  baseGallery.querySelector('.gallery__title').textContent = initialCards[j].name;
+  baseGallery.querySelector('.gallery__image').setAttribute('src', initialCards[j].link);
+  baseGallery.querySelector('.gallery__image').setAttribute('alt', initialCards[j].name);
+  galleryContainer.prepend(baseGallery);
+  update();
+}
+
 function popUpClose() {
     popUp.classList.remove('popup_opened');
 }
@@ -60,50 +77,85 @@ function popUpOpen() {
     popupRole.value = Role.textContent;
 }
 
-function popUpSaved(evt) {
-    evt.preventDefault();
-    Username.textContent = popupUsername.value;
-    Role.textContent = popupRole.value;
-    popUp.classList.remove('popup_opened');
-}
 function popUpAddOpen() {
   popUpAdd.classList.add('popup_opened');
 }
+
 function buttonPopUpAddClose() {
   popUpAdd.classList.remove('popup_opened');
 }
+
 function create(nameValue, urlValue) {
   const template = document.querySelector('#gallery-template').content;
-  console.log(template);
   const galleryItem = template.querySelector('.gallery__item').cloneNode(true);
   galleryItem.querySelector('.gallery__title').textContent = nameValue;
-  galleryItem.querySelector('.gallery__image').src = urlValue;
+  galleryItem.querySelector('.gallery__image').setAttribute('src', urlValue);
+  galleryItem.querySelector('.gallery__image').setAttribute('alt', nameValue);
   galleryContainer.prepend(galleryItem);
   popUpAdd.classList.remove('popup_opened');
-  console.log(likes, galleryDelete);
 }
 
+function popupImageClose() {
+  popupImageContainer.classList.remove('popup_opened');
+}
 
+function like(evt) {
+  const likeItem = evt.currentTarget;
+  if (likeItem.classList.contains('gallery__like_active')) {
+    likeItem.classList.remove('gallery__like_active');
+  }
+  else {
+    likeItem.classList.add('gallery__like_active');
+  }
+}
 
-
-
-buttonCreate.addEventListener('click', function() {
+function createNew(evt) {
+  evt.preventDefault();
   const name = container.querySelector('.popup__name');
   const url = container.querySelector('.popup__url');
   create(name.value, url.value);
   update();
-  likes.forEach((likes) => likes.addEventListener('click', () => likes.classList.toggle('gallery__like_active')));
+  likes.forEach((likes) => likes.addEventListener('click', like));
   galleryDelete.forEach((galleryDelete) => galleryDelete.addEventListener('click', () => galleryDelete.closest('.gallery__item').remove()));
-});
+  popUpAdd.classList.remove('popup_opened');
+  name.value = '';
+  url.value = '';
+}
 
-likes.forEach((likes) => likes.addEventListener('click', () => likes.classList.toggle('gallery__like_active')));
+function openFull(event) {
+  const titleG = event.currentTarget.closest(".gallery__item").querySelector('.gallery__title');
+  popupTitle.textContent = titleG.textContent;
+  popupImage = event.currentTarget;
+  popupImageContainer.classList.add('popup_opened')
+  document.querySelector('.popup__image').src = popupImage.src;
+  update();
+}
+
+function updateImages() {
+  for (const imageIndex of container.querySelectorAll('.gallery__image')) {
+    imageIndex.addEventListener('click', openFull);
+  }
+}
+updateImages();
+
+likes.forEach((likes) => likes.addEventListener('click', like));
+
 galleryDelete.forEach((galleryDelete) => galleryDelete.addEventListener('click', () => galleryDelete.closest('.gallery__item').remove()));
 buttonPopAdd.addEventListener('click', popUpAddOpen);
 popUpAddClose.addEventListener('click', buttonPopUpAddClose);
 popUpEdit.addEventListener('click', popUpOpen);
+popupImageButton.addEventListener('click', popupImageClose);
 popUpClosed.addEventListener('click', popUpClose);
-popupForm.addEventListener('submit', popUpSaved);
 
+function popUpSaved(evt) {
+  evt.preventDefault();
+  Username.textContent = popupUsername.value;
+  Role.textContent = popupRole.value;
+  popUp.classList.remove('popup_opened');
+}
+
+popupForm[0].addEventListener('submit', popUpSaved);
+popupForm[1].addEventListener('submit', createNew);
 
 
 

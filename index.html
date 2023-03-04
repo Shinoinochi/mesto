@@ -38,90 +38,6 @@
                     </button>
                 </section>
                 <section class="gallery">
-                    <div class="gallery__item">
-                        <button type="button" class="gallery__delete"></button>
-                        <img
-                            src="./images/kirill-pershin-1088404-unsplash.jpg"
-                            alt=""
-                            class="gallery__image">
-                        <div class="gallery__info">
-                            <h3 class="gallery__title">Карачаевск</h3>
-                            <button
-                                type="button"
-                                class="gallery__like">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="gallery__item">
-                        <button type="button" class="gallery__delete"></button>
-                        <img
-                            src="./images/kirill-pershin-1404681-unsplash.jpg"
-                            alt=""
-                            class="gallery__image">
-                        <div class="gallery__info">
-                            <h3 class="gallery__title">Гора Эльбрус</h3>
-                            <button
-                                type="button"
-                                class="gallery__like">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="gallery__item">
-                        <button type="button" class="gallery__delete"></button>
-                        <img
-                            src="./images/kirill-pershin-1556355-unsplash.jpg"
-                            alt=""
-                            class="gallery__image">
-                        <div class="gallery__info">
-                            <h3 class="gallery__title">Домбай</h3>
-                            <button
-                                type="button"
-                                class="gallery__like">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="gallery__item">
-                        <button type="button" class="gallery__delete"></button>
-                        <img
-                            src="./images/kirill-pershin-1404681-unsplash.jpg"
-                            alt=""
-                            class="gallery__image">
-                        <div class="gallery__info">
-                            <h3 class="gallery__title">Гора Эльбрус</h3>
-                            <button
-                                type="button"
-                                class="gallery__like">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="gallery__item">
-                        <button type="button" class="gallery__delete"></button>
-                        <img
-                            src="./images/kirill-pershin-1556355-unsplash.jpg"
-                            alt=""
-                            class="gallery__image">
-                        <div class="gallery__info">
-                            <h3 class="gallery__title">Домбай</h3>
-                            <button
-                                type="button"
-                                class="gallery__like">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="gallery__item">
-                        <button type="button" class="gallery__delete"></button>
-                        <img
-                            src="./images/kirill-pershin-1088404-unsplash.jpg"
-                            alt=""
-                            class="gallery__image">
-                        <div class="gallery__info">
-                            <h3 class="gallery__title">Карачаево-Челябинск</h3>
-                            <button 
-                                type="button"
-                                class="gallery__like">
-                            </button>
-                        </div>
-                    </div>
                     <div class="popup">
                         <div class="popup__container">
                             <button type="button" class="popup__button-close"></button>
@@ -158,19 +74,17 @@
                                 action="#"
                                 method="post"
                                 target="_blank"
-                                class="popup__form ">
+                                class="popup__form">
                                 <input 
                                         type="text"
                                         minlength="3"
                                         maxlength="20"
-                                        required
+                                        
                                         placeholder="Название"
                                         class="popup__name popup__input">
                                 <input 
                                         type="url"
-                                        minlength="3"
                                         
-                                        required
                                         placeholder="Ссылка на картинку"
                                         class="popup__url popup__input">
                                 <button type="submit" class="popup__button-create popup__button">
@@ -178,6 +92,13 @@
                                 </button>
                             </form>
                             
+                        </div>
+                    </div>
+                    <div class="popup popup-image">
+                        <div class="popup__image-container">
+                            <button type="button" class="popup__button-close popup__button-image"></button>
+                            <img src="" alt="" class="popup__image">
+                            <h3 class="popup-image__title"></h3>
                         </div>
                     </div>
                 </section>
