@@ -1,19 +1,25 @@
-let container = document.querySelector('.page');
-let popUpClosed = container.querySelector('.popup__button-close');
-let popUp = container.querySelector('.popup');
-let popUpAdd = container.querySelector('.popup-create');
+const container = document.querySelector('.page');
+const profileCloseButton = container.querySelector('.profile__close-button');
+// const popUp = container.querySelector('.popup');
+
+const profilePopup = container.querySelector('.profile-popup');
+
+const popUpAdd = container.querySelector('.popup-create');
 let popUpAddClose = container.querySelector('.popup__buttonAdd-close');
 let popUpCreate = container.querySelector('.popup-create');
 let popUpEdit = container.querySelector('.profile__edit');
-let Username = container.querySelector('.profile__name');
-let Role = container.querySelector('.profile__role');
+let username = container.querySelector('.profile__name');
+let role = container.querySelector('.profile__role');
 let popupUsername = container.querySelector('.popup__username');
 let popupRole = container.querySelector('.popup__role');
-let popupForm = container.querySelectorAll('.popup__form');
+let popupForms = container.querySelectorAll('.popup__form');
 const galleryContainer = container.querySelector('.gallery');
+
+
 let cardName = container.querySelectorAll('.gallery__title');
 let cardImage = container.querySelectorAll('.gallery__image');
 let likes = container.querySelectorAll('.gallery__like');
+
 let galleryItems = container.querySelectorAll('.gallery__item');
 let galleryDelete = container.querySelectorAll('.gallery__delete');
 const buttonCreate = container.querySelector('.popup__button-create');
@@ -67,14 +73,14 @@ for (let j = 0; j < initialCards.length; j++) {
   update();
 }
 
-function popUpClose() {
-    popUp.classList.remove('popup_opened');
+function closeProfile() {
+    profilePopup.classList.remove('popup_opened');
 }
 
 function popUpOpen() {
-    popUp.classList.add('popup_opened');
-    popupUsername.value = Username.textContent;
-    popupRole.value = Role.textContent;
+    profilePopup.classList.add('popup_opened');
+    popupUsername.value = username.textContent;
+    popupRole.value = role.textContent;
 }
 
 function popUpAddOpen() {
@@ -145,17 +151,17 @@ buttonPopAdd.addEventListener('click', popUpAddOpen);
 popUpAddClose.addEventListener('click', buttonPopUpAddClose);
 popUpEdit.addEventListener('click', popUpOpen);
 popupImageButton.addEventListener('click', popupImageClose);
-popUpClosed.addEventListener('click', popUpClose);
+profileCloseButton.addEventListener('click', closeProfile);
 
 function popUpSaved(evt) {
   evt.preventDefault();
-  Username.textContent = popupUsername.value;
-  Role.textContent = popupRole.value;
-  popUp.classList.remove('popup_opened');
+  username.textContent = popupUsername.value;
+  role.textContent = popupRole.value;
+  profilePopup.classList.remove('popup_opened');
 }
 
-popupForm[0].addEventListener('submit', popUpSaved);
-popupForm[1].addEventListener('submit', createNew);
+popupForms[0].addEventListener('submit', popUpSaved);
+popupForms[1].addEventListener('submit', createNew);
 
 
 
