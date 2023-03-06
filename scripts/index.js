@@ -15,6 +15,8 @@ const cardButtonAdd = container.querySelector('.profile__add');
 const imagePopup = container.querySelector('.popup-image');
 const popupImageTitle = container.querySelector('.popup-image__title');
 const templateCard = document.querySelector('#gallery-template').content;
+const popupCreateName = container.querySelector('.popup__name');
+const popupCreateUrl = container.querySelector('.popup__url');
 const initialCards = [
     {
       name: 'Архыз',
@@ -44,20 +46,20 @@ const initialCards = [
 
 
 function createCard(item) {
-  let baseGallery = templateCard.querySelector('.gallery__item').cloneNode(true);
-  let galleryCardTitle = baseGallery.querySelector('.gallery__title');
-  let galleryCardImage = baseGallery.querySelector('.gallery__image');
+  const baseGallery = templateCard.querySelector('.gallery__item').cloneNode(true);
+  const galleryCardTitle = baseGallery.querySelector('.gallery__title');
+  const galleryCardImage = baseGallery.querySelector('.gallery__image');
   baseGallery.querySelector('.gallery__delete').addEventListener('click', () => baseGallery.closest('.gallery__item').remove());
-  galleryCardImage.addEventListener('click', openImagePopup);
+  galleryCardImage.addEventListener('click', () => openImagePopup(baseGallery));
   baseGallery.querySelector('.gallery__like').addEventListener('click', like);
   galleryCardImage.setAttribute('src', item.link);
-  galleryCardTitle.setAttribute('alt', item.name);
+  galleryCardImage.setAttribute('alt', item.name);
   galleryCardTitle.textContent = item.name;
   return baseGallery;
 }
 
 for (let j = 0; j < initialCards.length; j++) {
-  let cardElement = createCard(initialCards[j]);
+  const cardElement = createCard(initialCards[j]);
   galleryContainer.prepend(cardElement);
 }
 
@@ -69,14 +71,14 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function saveProfilePopup(evt) {
+function saveProfileForm(evt) {
   evt.preventDefault();
   username.textContent = popupUsername.value;
   role.textContent = popupRole.value;
   closePopup(profilePopup);
 }
 
-profileForm.addEventListener('submit', saveProfilePopup);
+profileForm.addEventListener('submit', saveProfileForm);
 
 
 function like(evt) {
@@ -86,11 +88,9 @@ function like(evt) {
 
 function createNewCard(evt) {
   evt.preventDefault();
-  const name = container.querySelector('.popup__name');
-  const url = container.querySelector('.popup__url');
   const card = {
-    name: name.value,
-    link: url.value
+    name: popupCreateName.value,
+    link: popupCreateUrl.value
   };
   createCard(card);
   galleryContainer.prepend(createCard(card));
@@ -98,24 +98,26 @@ function createNewCard(evt) {
   evt.target.reset();
 }
 
-function openImagePopup(event) {
-  const popupTitle = event.currentTarget.closest(".gallery__item").querySelector('.gallery__title');
+function openImagePopup(item) {
+  const popupTitle = item.querySelector('.gallery__title');
   popupImageTitle.textContent = popupTitle.textContent;
-  const popupImage = event.currentTarget;
+  const popupImage = item.querySelector('.gallery__image');
   openPopup(imagePopup);
-  document.querySelector('.popup__image').src = popupImage.src;
+  const popupImageFull = document.querySelector('.popup__image')
+  popupImageFull.src = popupImage.src;
+  popupImageFull.setAttribute('alt', popupImageTitle.textContent);
 }
 
 cardButtonAdd.addEventListener('click', () => openPopup(popupCreate));
 
 
-function editPopup() {
+function editProfilePopup() {
   openPopup(profilePopup);
   popupUsername.value = username.textContent;
   popupRole.value = role.textContent;
 }
 
-popUpEdit.addEventListener('click', editPopup);
+popUpEdit.addEventListener('click', editProfilePopup);
 createForm.addEventListener('submit', createNewCard);
 
 closeButtons.forEach((button) => {
