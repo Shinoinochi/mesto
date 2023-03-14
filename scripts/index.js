@@ -142,7 +142,3 @@ function closeClickOverlay(pop, evt) {
 }
 
 
-profilePopup.addEventListener('click', function(evt) {
-
-});
-
