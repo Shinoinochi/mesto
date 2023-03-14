@@ -1,6 +1,7 @@
 const container = document.querySelector('.page');
 const closeButtons = container.querySelectorAll('.popup__button-close');
 const popup = container.querySelector('.popup');
+const popups = container.querySelectorAll('.popup');
 const profilePopup = container.querySelector('.profile-popup');
 const profileForm = document.forms['profile-form']
 const createForm = document.forms['create-form']
@@ -80,7 +81,6 @@ function saveProfileForm(evt) {
 
 profileForm.addEventListener('submit', saveProfileForm);
 
-
 function like(evt) {
   const likeItem = evt.currentTarget;
   likeItem.classList.toggle('gallery__like_active');
@@ -123,5 +123,26 @@ createForm.addEventListener('submit', createNewCard);
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
+});
+
+popups.forEach((pop) => {
+  pop.addEventListener('click', (evt) =>  closeClickOverlay(pop, evt));
+  window.addEventListener('keydown',(evt) => closeKeyOverlay(pop, evt));
+});
+
+function closeKeyOverlay(pop, evt) {
+  if (evt.key === "Escape") {
+    closePopup(pop);
+  }
+}
+function closeClickOverlay(pop, evt) {
+  if (evt.currentTarget === evt.target) {
+    closePopup(pop);
+  }
+}
+
+
+profilePopup.addEventListener('click', function(evt) {
+
 });
 
