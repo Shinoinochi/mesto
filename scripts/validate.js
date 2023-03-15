@@ -25,7 +25,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
         const check = elemFirst.validity.valid && elemSecond.validity.valid;
-        checkInputValidation(formElement, inputElement);
+        checkInputValidation(formElement, inputElement, inputName, inputRole);
         checkButton(check, formElement, submitButtonSelector, inactiveButtonClass);
       });
     });
@@ -46,10 +46,10 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 const forms = ({
     formSelector: '.form',
     inputSelector: '.popup__input',
-    inputName: '#username-input',
-    inputRole: '#role-input',
+    inputName: '.form__input-first',
+    inputRole: '.form__input-second',
     submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
+    inactiveButtonClass: 'popup__button_disabled'
   }); 
 
   function enableValidation ({formSelector, submitButtonSelector, inputSelector, inputName, inputRole, inactiveButtonClass}) {
