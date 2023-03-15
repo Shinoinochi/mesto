@@ -47,19 +47,25 @@
                                 action="#"
                                 method="post"
                                 target="_blank"
-                                class="popup__form ">
+                                class="popup__form form">
                                 <input 
                                         type="text"
+                                        placeholder="Имя"
                                         minlength="2"
                                         maxlength="40"
                                         required
-                                        class="popup__username popup__input">
+                                        class="popup__username popup__input"
+                                        id="username-input">
+                                <span class="form__input-error form__username-input-error" ></span>
                                 <input 
                                         type="text"
+                                        placeholder="О себе"
                                         minlength="2"
                                         maxlength="200"
                                         required
-                                        class="popup__role popup__input">
+                                        class="popup__role popup__input"
+                                        id="role-input">
+                                <span class="form__input-error form__role-input-error" ></span>
                                 <button type="submit" class="popup__button">
                                     Сохранить
                                 </button>
@@ -76,20 +82,24 @@
                                 action="#"
                                 method="post"
                                 target="_blank"
-                                class="popup__form">
+                                class="popup__form form">
                                 <input 
                                         type="text"
-                                        minlength="3"
+                                        minlength="2"
                                         maxlength="20"
-                                        
+                                        required
                                         placeholder="Название"
-                                        class="popup__name popup__input">
+                                        class="popup__name popup__input"
+                                        id="username-input">
+                                <span class="form__input-error form__username-input-error" ></span>
                                 <input 
                                         type="url"
-                                        
+                                        required
                                         placeholder="Ссылка на картинку"
-                                        class="popup__url popup__input">
-                                <button type="submit" class="popup__button-create popup__button">
+                                        class="popup__url popup__input"
+                                        id="role-input">
+                                <span class="form__input-error form__role-input-error" ></span>
+                                <button type="submit" class="popup__button-create popup__button popup__button_disabled" disabled>
                                     Создать
                                 </button>
                             </form>
@@ -126,5 +136,6 @@
             </div>
         </template>
         <script src="./scripts/index.js"></script>
+        <script src="./scripts/validate.js"></script>
     </body>
 </html>

@@ -130,6 +130,8 @@ popups.forEach((pop) => {
   window.addEventListener('keydown',(evt) => closeKeyOverlay(pop, evt));
 });
 
+
+
 function closeKeyOverlay(pop, evt) {
   if (evt.key === "Escape") {
     closePopup(pop);
@@ -140,5 +142,4 @@ function closeClickOverlay(pop, evt) {
     closePopup(pop);
   }
 }
-
 

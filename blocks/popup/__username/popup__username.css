@@ -1,8 +1,0 @@
-.popup__username {
-    margin-bottom: 23px;
-}
-@media screen and (max-width: 500px) {
-    .popup__username {
-        margin-bottom: 23px;
-    }
-}
