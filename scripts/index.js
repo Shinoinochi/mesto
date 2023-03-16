@@ -18,7 +18,7 @@ const popupImageTitle = document.querySelector('.popup-image__title');
 const templateCard = document.querySelector('#gallery-template').content;
 const popupCreateName = document.querySelector('.popup__name');
 const popupCreateUrl = document.querySelector('.popup__url');
-
+const popupImageFull = document.querySelector('.popup__image')
 
 function createCard(item) {
   const baseGallery = templateCard.querySelector('.gallery__item').cloneNode(true);
@@ -78,7 +78,6 @@ function createNewCard(evt) {
 function openImagePopup(galleryCardTitle, galleryCardImage) {
   popupImageTitle.textContent = galleryCardTitle.textContent;
   openPopup(imagePopup);
-  const popupImageFull = document.querySelector('.popup__image')
   popupImageFull.src = galleryCardImage.src;
   popupImageFull.setAttribute('alt', galleryCardTitle.textContent);
 }
