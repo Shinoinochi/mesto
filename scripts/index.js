@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const container = document.querySelector('.page');
 const closeButtons = document.querySelectorAll('.popup__button-close');
 const popup = document.querySelector('.popup');
@@ -15,28 +18,11 @@ const galleryContainer = document.querySelector('.gallery');
 const cardButtonAdd = document.querySelector('.profile__add');
 const imagePopup = document.querySelector('.popup-image');
 const popupImageTitle = document.querySelector('.popup-image__title');
-const templateCard = document.querySelector('#gallery-template').content;
+export const templateCard = document.querySelector('#gallery-template').content;
 const popupCreateName = document.querySelector('.popup__name');
 const popupCreateUrl = document.querySelector('.popup__url');
 const popupImageFull = document.querySelector('.popup__image')
 
-function createCard(item) {
-  const baseGallery = templateCard.querySelector('.gallery__item').cloneNode(true);
-  const galleryCardTitle = baseGallery.querySelector('.gallery__title');
-  const galleryCardImage = baseGallery.querySelector('.gallery__image');
-  baseGallery.querySelector('.gallery__delete').addEventListener('click', () => baseGallery.closest('.gallery__item').remove());
-  galleryCardImage.addEventListener('click', () => openImagePopup(galleryCardTitle, galleryCardImage));
-  baseGallery.querySelector('.gallery__like').addEventListener('click', like);
-  galleryCardImage.setAttribute('src', item.link);
-  galleryCardImage.setAttribute('alt', item.name);
-  galleryCardTitle.textContent = item.name;
-  return baseGallery;
-}
-
-for (let j = 0; j < initialCards.length; j++) {
-  const cardElement = createCard(initialCards[j]);
-  galleryContainer.prepend(cardElement);
-}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -46,7 +32,12 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   window.removeEventListener('keydown', closeKeyOverlay);
-  clearInputValue(popup);
+  if(popup.classList.contains('profile-popup')) {
+    profileFormValidator.clearInputValue(popup);
+  }
+  else {
+    cardFormValidator.clearInputValue(popup);
+  }
 }
 
 function saveProfileForm(evt) {
@@ -58,24 +49,14 @@ function saveProfileForm(evt) {
 
 profileForm.addEventListener('submit', saveProfileForm);
 
-function like(evt) {
+export function like(evt) {
   const likeItem = evt.currentTarget;
   likeItem.classList.toggle('gallery__like_active');
 }
 
-function createNewCard(evt) {
-  evt.preventDefault();
-  const card = {
-    name: popupCreateName.value,
-    link: popupCreateUrl.value
-  };
-  createCard(card);
-  galleryContainer.prepend(createCard(card));
-  closePopup(popupCreate);
-  evt.target.reset();
-}
 
-function openImagePopup(galleryCardTitle, galleryCardImage) {
+
+export function openImagePopup(galleryCardTitle, galleryCardImage) {
   popupImageTitle.textContent = galleryCardTitle.textContent;
   openPopup(imagePopup);
   popupImageFull.src = galleryCardImage.src;
@@ -92,7 +73,7 @@ function editProfilePopup() {
 }
 
 popUpEdit.addEventListener('click', editProfilePopup);
-createForm.addEventListener('submit', createNewCard);
+
 
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
@@ -116,4 +97,30 @@ function closeClickOverlay(pop, evt) {
     closePopup(pop);
   }
 }
+
+for (let j = 0; j < initialCards.length; j++) {
+  const cardElement = new Card(initialCards[j], templateCard);
+  galleryContainer.prepend(cardElement.generateCard());
+}
+
+function createNewCard(evt) {
+  evt.preventDefault();
+  const card = {
+    name: popupCreateName.value,
+    link: popupCreateUrl.value
+  };
+  const cardElement = new Card(card, templateCard);
+  galleryContainer.prepend(cardElement.generateCard());
+  closePopup(popupCreate);
+  evt.target.reset();
+}
+createForm.addEventListener('submit', createNewCard);
+
+const profileFormValidator = new FormValidator(forms, profileForm);
+profileFormValidator.enableValidation();
+const cardFormValidator = new FormValidator(forms, createForm);
+cardFormValidator.enableValidation();
+
+
+
 
