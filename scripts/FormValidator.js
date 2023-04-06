@@ -2,6 +2,8 @@ export default class FormValidator {
     constructor(formData, formElement) {
         this._formData = formData;
         this._formElement = formElement;
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._formData.inputSelector));
+        this._button = this._formElement.querySelector(this._formData.submitButtonSelector);
     }   
     _showInputError(inputElement) {
         this._errorElement = this._formElement.querySelector(`.form__${inputElement.id}-error`);
@@ -15,21 +17,20 @@ export default class FormValidator {
       }
 
 
-    _checkButton(check) {
-        this._button = this._formElement.querySelector(this._formData.submitButtonSelector);
-        if (check) {
-          this._button.removeAttribute('disabled');
-          this._button.classList.remove(this._formData.inactiveButtonClass);
-        }
-        else {
-          this._button.setAttribute('disabled', true);
-          this._button.classList.add(this._formData.inactiveButtonClass);
-        }
+    _checkButton(_inputList) {
+        this._check = this._inputList.every(list => list.validity.valid);
+          if (this._check) {
+              this._button.removeAttribute('disabled');
+              this._button.classList.remove(this._formData.inactiveButtonClass);
+          }
+          else {
+              this._button.setAttribute('disabled', true);
+              this._button.classList.add(this._formData.inactiveButtonClass);
+          }
       }
 
-    clearInputValue(popup) {
-        this._popupElements = popup.querySelectorAll('.popup__input');
-        this._popupElements.forEach((element) => {
+    clearInputValue() {
+        this._inputList.forEach((element) => {
           this._hideInputError(element);
           element.classList.remove('popup__input-error');
         });
@@ -43,19 +44,17 @@ export default class FormValidator {
           this._hideInputError(inputElement);
         }
       }
+      
     _setEventListeners() {
-        this._inputList = Array.from(this._formElement.querySelectorAll(this._formData.inputSelector));
-        this._elemFirst = this._formElement.querySelector(this._formData.inputName);
-        this._elemSecond = this._formElement.querySelector(this._formData.inputRole);
+       
         this._formElement.addEventListener('submit', (evt) => {
           evt.preventDefault();
-          this._checkButton(false);
+          this._checkButton(this._inputList);
         });
         this._inputList.forEach((inputElement) => {
           inputElement.addEventListener('input', () => {
-            this._check = this._elemFirst.validity.valid && this._elemSecond.validity.valid;
             this._checkInputValidation(inputElement);
-            this._checkButton(this._check);
+            this._checkButton(this._inputList);
           });
         });
       }
