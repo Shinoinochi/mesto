@@ -32,7 +32,7 @@ export default class FormValidator {
     clearInputValue() {
         this._inputList.forEach((element) => {
           this._hideInputError(element);
-          element.classList.remove('popup__input-error');
+          element.classList.remove(this._formData.inputError);
         });
         
       }

@@ -1,4 +1,4 @@
-import { templateCard, like, openImagePopup } from './index.js';
+import { like, openImagePopup } from './index.js';
 export default class Card {
     constructor(item, template) {
         this._name = item.name;
@@ -6,14 +6,14 @@ export default class Card {
         this._template = template;
     }
     _getTemplate() {
-        const baseGallery = templateCard
+        const baseGallery = this._template
             .querySelector('.gallery__item')
             .cloneNode(true);
         return baseGallery;
     }
     _setListener() {
         this._card.querySelector('.gallery__delete').addEventListener('click', () => this._card.closest('.gallery__item').remove());
-        this._galleryImage.addEventListener('click', () => openImagePopup(this._galleryName, this._galleryImage));
+        this._galleryImage.addEventListener('click', () => openImagePopup({name: this._name, link: this._link}));
         this._card.querySelector('.gallery__like').addEventListener('click', like);
         return this._card;
     }
