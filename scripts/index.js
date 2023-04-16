@@ -1,5 +1,9 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
+import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 
 const container = document.querySelector('.page');
 const buttonsClose = document.querySelectorAll('.popup__button-close');
@@ -23,15 +27,15 @@ const inputUrlFormCreateCard = document.querySelector('.popup__url');
 const popupImageFull = document.querySelector('.popup__image')
 
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  window.addEventListener('keydown', closeKeyOverlay);
-}
+// function openPopup(popup) {
+//   popup.classList.add('popup_opened');
+//   window.addEventListener('keydown', closeKeyOverlay);
+// }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  window.removeEventListener('keydown', closeKeyOverlay);
-}
+// function closePopup(popup) {
+//   popup.classList.remove('popup_opened');
+//   window.removeEventListener('keydown', closeKeyOverlay);
+// }
 
 function saveProfileForm(evt) {
   evt.preventDefault();
@@ -50,23 +54,27 @@ export function like(evt) {
 
 
 export function openImagePopup(data) {
+  newPopupImage.open();
+  newPopupImage.setEventListeners();
   popupImageTitle.textContent = data.name;
   popupImageFull.src = data.link;
   popupImageFull.setAttribute('alt', data.name);
-  openPopup(popupImage);
 }
 
 function handleOpenPopupCreateCard() {
+  newPopupCard.open();
+  newPopupCard.setEventListeners();
   formCreate.reset();
   cardFormValidator.clearInputValue();
-  openPopup(popupCreate);
 }
 
 buttonAddCard.addEventListener('click', handleOpenPopupCreateCard);
-
-
+const newPopupCard = new Popup(popupCreate);
+const newPopupForm = new Popup(popupProfile);
+const newPopupImage = new Popup(popupImage);
 function editProfilePopup() {
-  openPopup(popupProfile);
+  newPopupForm.open();
+  newPopupForm.setEventListeners();
   inputNamePopupUser.value = username.textContent;
   inputRolePopupUser.value = role.textContent;
   profileFormValidator.clearInputValue();
@@ -77,12 +85,12 @@ buttonPopupEdit.addEventListener('click', editProfilePopup);
 
 buttonsClose.forEach((button) => {
   const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
+  //button.addEventListener('click', () => closePopup(popup));
 });
 
-popups.forEach((pop) => {
-  pop.addEventListener('click', (evt) =>  closeClickOverlay(pop, evt));
-});
+// popups.forEach((pop) => {
+//   pop.addEventListener('click', (evt) =>  closeClickOverlay(pop, evt));
+// });
 
 
 
@@ -92,15 +100,13 @@ function closeKeyOverlay(evt) {
     closePopup(popup);
   }
 }
-function closeClickOverlay(pop, evt) {
-  if (evt.currentTarget === evt.target) {
-    closePopup(pop);
-  }
-}
-
-// for (let j = 0; j < initialCards.length; j++) {
-//   renderCard(initialCards[j], templateCard, containerGallery);
+// function closeClickOverlay(pop, evt) {
+//   if (evt.currentTarget === evt.target) {
+//     closePopup(pop);
+//   }
 // }
+
+
 function createCard(element, template) {
   const cardElement = new Card(element, template);
   const newCard = cardElement.generateCard();
@@ -108,7 +114,6 @@ function createCard(element, template) {
 }
 function renderCard(card, template, container) {
   container.prepend(createCard(card, template));
-  // containerGallery.prepend(cardElement.generateCard());
 }
 
 function createNewCard(evt) {
@@ -121,7 +126,7 @@ function createNewCard(evt) {
   closePopup(popupCreate);
   evt.target.reset();
 }
-initialCards.forEach(item => renderCard(item, templateCard, containerGallery));
+// initialCards.forEach(item => renderCard(item, templateCard, containerGallery));
 
 formCreate.addEventListener('submit', createNewCard);
 
@@ -133,3 +138,13 @@ cardFormValidator.enableValidation();
 
 
 
+const cardItems = new Section({
+  data : initialCards,
+  renderer : (item) => {
+    const card = new Card(item, templateCard);
+    const cardElement = card.generateCard();
+    cardItems.addItem(cardElement);
+  }
+  
+}, containerGallery)
+cardItems.renderItems();

@@ -1,0 +1,11 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "Сдача проекта \"Сдача проекта Mesto: базовая функциональность\" для Яндекс.Практикум, в ней научились использовать javascript и создавать PopUp.\r * [Ссылка на проект](https://shinoinochi.github.io/mesto/)\r ### Технологии",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniil Kopylov",
+  "license": "ISC"
+}
