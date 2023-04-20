@@ -1,10 +1,10 @@
-import { like } from './index.js';
+import { like } from '../pages/index.js';
 export default class Card {
     constructor({data, handleCardClick}, template) {
         this._name = data.name;
         this._link =  data.link;
         this._handleCardClick = handleCardClick;
-        this._template = template;
+        this._template = document.querySelector(template).content;
     }
     _getTemplate() {
         const baseGallery = this._template

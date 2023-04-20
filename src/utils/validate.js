@@ -1,4 +1,4 @@
-export const forms = ({
+export const validationConfig = ({
     formSelector: '.form',
     inputSelector: '.popup__input',
     inputName: '.form__input-first',

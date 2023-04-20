@@ -17,7 +17,7 @@ export default class FormValidator {
       }
 
 
-    _checkButton(_inputList) {
+    checkButton() {
         this._check = this._inputList.every(list => list.validity.valid);
           if (this._check) {
               this._button.removeAttribute('disabled');
@@ -29,10 +29,9 @@ export default class FormValidator {
           }
       }
 
-    clearInputValue() {
+    hideInputsErrors() {
         this._inputList.forEach((element) => {
           this._hideInputError(element);
-          element.classList.remove(this._formData.inputError);
         });
         
       }
@@ -49,12 +48,12 @@ export default class FormValidator {
        
         this._formElement.addEventListener('submit', (evt) => {
           evt.preventDefault();
-          this._checkButton(this._inputList);
+          this.checkButton(this._inputList);
         });
         this._inputList.forEach((inputElement) => {
           inputElement.addEventListener('input', () => {
             this._checkInputValidation(inputElement);
-            this._checkButton(this._inputList);
+            this.checkButton(this._inputList);
           });
         });
       }
