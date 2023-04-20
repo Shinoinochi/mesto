@@ -47,7 +47,7 @@ function editProfilePopup() {
 
 function createCard(item) {
   const card = renderCard(item);
-  const newCard = card.generateCard();
+  const newCard = card.generateCard(like);
   return newCard;
 }
 
@@ -81,7 +81,7 @@ const cardItems = new Section({
   data : initialCards,
   renderer : (item) => {
     const card = renderCard(item);
-    const cardElement = card.generateCard();
+    const cardElement = card.generateCard(like);
     cardItems.addItem(cardElement);
   }
   
