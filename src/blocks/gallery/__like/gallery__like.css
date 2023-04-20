@@ -8,7 +8,7 @@
     background-color: transparent;
     border: none;
     background-repeat: no-repeat;
-    background-image: url(../../../images/VectorHeath.svg);
+    background-image: url('../../../images/VectorHeath.svg');
 }
 
 .gallery__like:hover {

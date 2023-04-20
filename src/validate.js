@@ -1,4 +1,4 @@
-const forms = ({
+export const forms = ({
     formSelector: '.form',
     inputSelector: '.popup__input',
     inputName: '.form__input-first',
