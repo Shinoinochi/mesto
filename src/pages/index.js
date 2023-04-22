@@ -20,12 +20,6 @@ function saveProfileForm(handleFormSubmit) {
     userAbout: handleFormSubmit.text
   });
 }
-
-export function like(evt) {
-  const likeItem = evt.currentTarget;
-  likeItem.classList.toggle('gallery__like_active');
-}
-
 buttonAddCard.addEventListener('click', handleOpenPopupCreateCard);
 function handleOpenPopupCreateCard() {
   popupCreateCard.open();
@@ -47,7 +41,7 @@ function editProfilePopup() {
 
 function createCard(item) {
   const card = renderCard(item);
-  const newCard = card.generateCard(like);
+  const newCard = card.generateCard();
   return newCard;
 }
 
@@ -63,9 +57,7 @@ function renderCard(item) {
   const card = new Card({
     data: item,
     handleCardClick: (data) => {
-      
       image.open(data);
-      image.setEventListeners();
   }
   }, 
   '#gallery-template');
@@ -80,14 +72,14 @@ cardFormValidator.enableValidation();
 const cardItems = new Section({
   data : initialCards,
   renderer : (item) => {
-    const card = renderCard(item);
-    const cardElement = card.generateCard(like);
+    const cardElement = createCard(item);
     cardItems.addItem(cardElement);
   }
   
 }, '.gallery')
 userPopupForm.setEventListeners();
 popupCreateCard.setEventListeners();
+image.setEventListeners();
 cardItems.renderItems();
 
 
