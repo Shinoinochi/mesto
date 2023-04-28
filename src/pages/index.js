@@ -14,6 +14,17 @@ const inputNamePopupUser = document.querySelector('.popup__username');
 const inputRolePopupUser = document.querySelector('.popup__role');
 const buttonAddCard = document.querySelector('.profile__add');
 
+fetch('https://nomoreparties.co/v1/cohort-65/users/me',
+{
+  headers: {
+    authorization: '6b7c306a-38f3-4456-bb25-4b5474285830'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  }); 
+
 function saveProfileForm(handleFormSubmit) {
   userInfo.setUserInfo({
     userName: handleFormSubmit.name,
