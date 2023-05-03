@@ -1,9 +1,12 @@
 export default class Card {
-    constructor({data, handleCardClick}, templateSelector) {
+    constructor({data, handleCardClick, handleDeleteCard, handleLikeClick}, templateSelector) {
+        this._cardsData = data;
         this._name = data.name;
         this._link =  data.link;
         this._handleCardClick = handleCardClick;
+        this._handleDeleteCard = handleDeleteCard;
         this._template = templateSelector;
+        this._handleCardLike = handleLikeClick;
     }
     _getTemplate() {
         const baseGallery = document
@@ -14,12 +17,26 @@ export default class Card {
         return baseGallery;
     }
     _setListener() {
-        this._card.querySelector('.gallery__delete').addEventListener('click', () => this._card.remove());
+        this._card.querySelector('.gallery__delete').addEventListener('click', () => { this._handleDeleteCard(this._card, this._cardsData)});
         this._galleryImage.addEventListener('click', () => this._handleCardClick({name: this._name, link: this._link}));
-        this._buttonLike.addEventListener('click', () => this._buttonLike.classList.toggle('gallery__like_active'));
+        this._buttonLike.addEventListener('click', () => this._handleCardLike(this));
         return this._card;
     }
-
+    updateLikesData(likeData, card) {
+        if (likeData.find((element) => element._id === "26d399721e24ac5ac294ce39")) {
+            this._checkLike(likeData);
+        }
+        card.querySelector('.gallery__like-count').textContent = likeData.length;
+        
+    }
+    _checkLike(isLiked) {
+        if (isLiked) {
+            this._buttonLike.classList.add('gallery__like_active');
+        }
+        else { 
+            this._buttonLike.classList.remove('gallery__like_active');
+        }
+    }
     generateCard() {
         this._card = this._getTemplate();
         this._galleryName = this._card.querySelector('.gallery__title');
@@ -31,6 +48,16 @@ export default class Card {
         this._card = this._setListener();
         return this._card;
     }
-    
+    check(card, item) {
+        if(item.owner._id !== "26d399721e24ac5ac294ce39") {
+           card.querySelector('.gallery__delete').remove();
+        }
+    }
+
+    like(isLiked, cardApi) {
+        this._cardsData = cardApi;
+        this._card.querySelector('.gallery__like-count').textContent = this._cardsData.likes.length;
+        this._checkLike(isLiked);
+    }
 }
 
