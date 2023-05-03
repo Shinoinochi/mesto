@@ -19,7 +19,7 @@
                     <div class="profile__avatar">
                         <button type="button" class="profile__avatar-button"></button>
                         <img
-                            src=""
+                            src="<%=require('./images/Avatar.png')%>"
                             alt="Фотография профиля"
                             class="profile__image">
                     </div>
@@ -151,9 +151,9 @@
                             required
                             placeholder="Ссылка на аватар"
                             class="popup__url form__input-second popup__input"
-                            id="url-input"
+                            id="avatar-input"
                             name="text">
-                    <span class="form__input-error form__input-second-error form__url-input-error" ></span>
+                    <span class="form__input-error form__input-second-error form__avatar-input-error" ></span>
                     <button type="submit" class="popup__button-create popup__button popup__button_disabled" disabled>
                        Сохранить
                     </button>
