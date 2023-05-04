@@ -10,7 +10,9 @@ export default class UserInfo {
         }
     }
     setUserInfo({ userName, userAbout }) {
-        this._userName.textContent = userName;
-        this._userAbout.textContent = userAbout
+        if(userName && userAbout) {
+            this._userName.textContent = userName;
+            this._userAbout.textContent = userAbout
+        }
     }
 } 

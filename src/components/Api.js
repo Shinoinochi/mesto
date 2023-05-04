@@ -2,26 +2,29 @@ export default class Api {
     constructor({baseUrl, headers}) {
       this._url = baseUrl;
       this._header = headers;
-      console.log(this._header);
     }
-
+    _checkData(res) {
+      return res.ok? res.json(): Promise.reject(`Ошибка: ${res.status}`);
+    }
     async getLikes(method, cardId) {
-      return await fetch(`${this._url}cards/${cardId}/likes`, {
+      return fetch(`${this._url}cards/${cardId}/likes`, {
         method: method,
         headers: this._header
       })
       .then((res) => {
-        return res.ok? res.json(): Promise.reject(`Ошибка: ${res.status}`);
+         return this._checkData(res);
       });
     }
+    
     async getInitialCards() {
-        return await fetch(this._url + 'cards', {
+        return fetch(this._url + 'cards', {
             headers: this._header
           })
           .then(res => {
-            return res.ok? res.json(): Promise.reject(`Ошибка: ${res.status}`);
+            return this._checkData(res);
           });
     }
+
     async addNewCard(data) {
       return fetch(this._url + 'cards ', {
         method: 'POST',
@@ -32,7 +35,7 @@ export default class Api {
         })
       })
       .then((res) => {
-        return res.ok? res.json(): Promise.reject(`Ошибка: ${res.status}`);
+        return this._checkData(res);
       });
     }
 
@@ -42,9 +45,10 @@ export default class Api {
         headers: this._header
       })
       .then(res => {
-         return res.ok? res.json(): Promise.reject(`Ошибка: ${res.status}`);
+        return this._checkData(res);
       });
     }
+
     async editUser(name, about) {
       fetch(this._url +'/users/me', {
         method: 'PATCH',
@@ -53,8 +57,12 @@ export default class Api {
           name: name,
           about: about
         })
+      })
+      .then((res) => {
+        return this._checkData(res);
       });  
     }
+
     async setUserLogo(link) {
       fetch(this._url +'/users/me/avatar', {
         method: 'PATCH',
@@ -62,6 +70,9 @@ export default class Api {
         body: JSON.stringify({
           avatar: link
         })
+      })
+      .then((res) => {
+        return this._checkData(res);
       });  
     }
 
@@ -69,6 +80,9 @@ export default class Api {
        fetch(this._url + 'cards/' + id, {
         method: 'DELETE',
         headers: this._header
+      })
+      .then((res) => {
+        return this._checkData(res);
       });
     }
 }

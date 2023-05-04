@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({data, handleCardClick, handleDeleteCard, handleLikeClick}, templateSelector) {
+    constructor({data, handleCardClick, handleDeleteCard, handleLikeClick, userId}, templateSelector) {
         this._cardsData = data;
         this._name = data.name;
         this._link =  data.link;
@@ -7,6 +7,7 @@ export default class Card {
         this._handleDeleteCard = handleDeleteCard;
         this._template = templateSelector;
         this._handleCardLike = handleLikeClick;
+        this._userId = userId
     }
     _getTemplate() {
         const baseGallery = document
@@ -53,7 +54,6 @@ export default class Card {
            card.querySelector('.gallery__delete').remove();
         }
     }
-
     like(isLiked, cardApi) {
         this._cardsData = cardApi;
         this._card.querySelector('.gallery__like-count').textContent = this._cardsData.likes.length;
